@@ -1,27 +1,39 @@
 #include "search_methods.h"
-#include <cmath> // Потрібно для функції sqrt()
+#include <cmath>
 
 int goldenSectionSearch(int arr[], int size, int target) {
     int left = 0;
     int right = size - 1;
 
-    // Вираховуємо коефіцієнт золотого перерізу (приблизно 0.382)
     double goldenRatio = (3.0 - std::sqrt(5.0)) / 2.0;
 
     while (left <= right) {
-        // Точка поділу масиву за золотим перерізом
         int mid = left + (right - left) * goldenRatio;
 
         if (arr[mid] == target) {
-            return mid; // Елемент знайдено, повертаємо його індекс
+            return mid;
         }
 
         if (arr[mid] < target) {
-            left = mid + 1; // Шукаємо в правій частині
+            left = mid + 1;
         }
         else {
-            right = mid - 1; // Шукаємо в лівій частині
+            right = mid - 1;
         }
     }
-    return -1; // Якщо цикл закінчився, елемента немає
+    return -1;
+}
+
+int binarySearch(int arr[], int size, int target) {
+    int left = 0;
+    int right = size - 1;
+
+    while (left <= right) {
+        int mid = left + (right - left) / 2;
+
+        if (arr[mid] == target) return mid;
+        if (arr[mid] < target) left = mid + 1;
+        else right = mid - 1;
+    }
+    return -1;
 }
